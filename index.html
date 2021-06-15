@@ -18,7 +18,7 @@
     <div class="container">
       <main class="magazine">
         <section class="magazine__title">
-          <h3>Ingresa el HTML a convertir: </h3>
+          <h3>HTML a convertir: </h3>
           <textarea id="textAreaValue" name="textarea" rows="10%" cols="60%">Write something here</textarea> <br>
           <input type="button" id="sendInfo" value="Convertir">
           <h3>Resultado de la información: </h3>
@@ -33,6 +33,35 @@
 </html>
 
 <script>
+  document.getElementById("textAreaValue").value=`<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+ <link rel="stylesheet" href="/styles.css" />
+    <title>Travel|Leisure</title>
+  </head>
+  <body>
+<div class="main__container">
+      <h1>Travel + Leisure</h1>
+      <h4>Mexico</h4>
+      <section class="description">
+        <h2>Japan: Why the old traditions are our new normal</h2>
+      </section>
+      <div class="topics__container">
+        <section class="first__topics__container">
+          <h3>A World of Contrasts: Dreaming Mumbai</h3>
+          <h3>Food you need to try in Tel Aviv</h3>
+        </section>
+        <section class="second__topics__container">
+          <h3>Amsterdam: Enjoying the Art of the City</h3>
+          <h3>The Night Scene: Barcelona</h3>
+        </section>
+      </div>
+      <footer>
+        <small>travelplusleisure.com</small>
+      </footer>
+    </div>
+  </body>
+</html>`
 
   sendInfo.onclick = function (e) {
 
@@ -53,25 +82,31 @@
        tags[`${tagname.tagName}`] = tagname.innerText.replace(/\s+/g, " ").trim();
     }
 
-
   newArray=Object.entries(tags);
   for(let i in newArray)
   {
+    if(newArray[i][0]==="TITLE") {
+    finalArray.push(["heading", newArray[i][1]])
+    }
+    
+    if(newArray[i][0]==="DIV") {
+      finalArray.push(["articles",[{"heading": newArray[i][1].substr(0,20)}, {"shortDescription": newArray[i][1].substr(22,36)} ]])
+    }
+    
     if(newArray[i][0]==="FOOTER") {
       finalArray.push(["author", newArray[i][1]])
-    }
-    if(newArray[i][0]==="TITLE") {
-      finalArray.push(["heading", newArray[i][1]])
-    }
 
+    }
+    if(newArray[i][0]==="H2") {
+    finalArray.push(["subHeading", newArray[i][1]])
+    }
    }
-   // finalArray.push(["subHeading", newArray[i][1]])
-
-
 
  console.log(tags)
- console.log(ele)
- console.log("array final",finalArray)
+ //console.log(ele)
+ console.log(newArray)
+
+ //console.log("array final",finalArray)
 
     
   const obj = Object.fromEntries(finalArray);
