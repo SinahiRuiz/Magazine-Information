@@ -1,0 +1,31 @@
+:root {
+    --btnOperations: #7c7c7c;
+    --backgroundColor:#e2c8e9;
+    --btnBasicOperations: #fa9c0c;
+    --white:#ffffff;
+    --btnNumber:#f3e7f7;
+    --background:#FEF5E7;
+  }
+  
+  body {
+    background-color:var(--background);
+    align-items: center;
+    display: flex;
+    font-family: 'Noto Sans KR', sans-serif;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .container {
+    padding: 20px;
+    background-color: var(--backgroundColor);
+    height: 90vh;
+    width: 50vw;
+    overflow: scroll;
+
+  }
+
+.magazine .magazine__title{
+display: block;
+}

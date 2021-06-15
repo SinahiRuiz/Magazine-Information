@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Magazine Information</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@100;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+  </head>
+  <body>
+      <form name="form" id="form">
+    <div class="container">
+        <main class="magazine">
+            <section class="magazine__title">
+                <h3>Ingresa el HTML a convertir: </h3>
+                <textarea id="textAreaValue" name="textarea" rows="10%" cols="60%">Write something here</textarea>  <br>   
+                <input type="button" id="sendInfo" value="Convertir">           
+                <h3>Resultado de la información:</h3>
+                <span id="res"></span>
+            </section>
+        </main>
+    </div>
+</form>
+
+  </body>
+</html>
+
+<script>
+    
+    sendInfo.onclick = function(e){
+       // console.log("e", e)
+        // textAreaValue.value +=  this.value;
+        // console.log(this.value)
+        let htmlGet = document.getElementById("textAreaValue").value
+        console.log(htmlGet)
+
+    var str=htmlGet;
+
+let tag = document.createElement("div");
+tag.innerHTML = str;
+let t = tag.getElementsByTagName("*");
+let ele = [];
+let newArray=[]
+let arrayNameElements=[]
+let arrayFinal=[]
+
+for (let i = 0; i < t.length; i++) {
+  ele.push(t[i]);
+  newArray.push(ele[i].innerHTML)
+  arrayNameElements.push(ele[i].localName)
+}
+
+for(let i=0; i<arrayNameElements.length; i++) {
+propety=arrayNameElements[i];
+let value=newArray[i]
+arrayFinal.push([propety, value])
+}
+const obj = Object.fromEntries(arrayFinal);
+console.log(obj)
+document.getElementById('res').innerHTML = JSON.stringify(obj);
+
+}
+
+    </script>
