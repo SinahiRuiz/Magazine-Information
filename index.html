@@ -37,29 +37,44 @@
   sendInfo.onclick = function (e) {
 
     let htmlGet = document.getElementById("textAreaValue").value
-    //console.log(htmlGet)
     var str = htmlGet;
 
     let tag = document.createElement("div");
     tag.innerHTML = str;
     let t = tag.getElementsByTagName("*");
     let ele = [];
-    let newArray = []
-    let arrayNameElements = []
-    let arrayFinal = []
+    let tags = {};
+    let newArray = [];
+    let finalArray=[];
 
     for (let i = 0; i < t.length; i++) {
       ele.push(t[i]);
-      newArray.push(ele[i].innerHTML)
-      arrayNameElements.push(ele[i].localName)
+      let tagname = t[i];
+       tags[`${tagname.tagName}`] = tagname.innerText.replace(/\s+/g, " ").trim();
     }
 
-    for (let i = 0; i < arrayNameElements.length; i++) {
-      propety = arrayNameElements[i];
-      let value = newArray[i]
-      arrayFinal.push([propety, value])
+
+  newArray=Object.entries(tags);
+  for(let i in newArray)
+  {
+    if(newArray[i][0]==="FOOTER") {
+      finalArray.push(["author", newArray[i][1]])
     }
-    const obj = Object.fromEntries(arrayFinal);
+    if(newArray[i][0]==="TITLE") {
+      finalArray.push(["heading", newArray[i][1]])
+    }
+
+   }
+   // finalArray.push(["subHeading", newArray[i][1]])
+
+
+
+ console.log(tags)
+ console.log(ele)
+ console.log("array final",finalArray)
+
+    
+  const obj = Object.fromEntries(finalArray);
     console.log(obj)
     document.getElementById('res').innerHTML = JSON.stringify(obj);
 
